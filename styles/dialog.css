@@ -1,0 +1,21 @@
+dialog {
+
+    border-radius: 16px;
+    padding: 50px;
+    margin: auto;
+
+    box-shadow: black 10px 10px 10px;
+}
+
+.selected {
+    border-bottom: 3px solid orange;
+    color: orange;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
