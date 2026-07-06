@@ -1,21 +1,22 @@
 let pokemons = []
-
+let visiblePokemons = 8;
 
 
 async function fetchData() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=35');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=100');
     const responseToJson = await response.json();
     console.log(responseToJson);
     return responseToJson;
 }
 
-function renderPokeCards() {
-    for (let index = 0; index < pokemons.length; index++) {
-        const element = pokemons[index];
+function renderPokeCards(pokemonList = pokemons) {
+    document.getElementById('card').innerHTML = "";
+    for (let index = 0; index < visiblePokemons && index < pokemonList.length; index++) {
+        const element = pokemonList[index];
         document.getElementById('card').innerHTML += `
-        <div class="cards" onclick="openDialog(${index})" >
+        <div class="cards " onclick="openDialog(${index})">
             <input type="checkbox" class="cards_button" hidden>
-                <div class="cards">
+                <div class="cards-content type-${element.types[0].type.name}">
                     <div id="poke_name">
                         <h3>${element.name}</h3>
                     </div>
@@ -25,11 +26,10 @@ function renderPokeCards() {
                     <div id="poke_element">
                         <img src="./assets/types/${element.types[0].type.name}.svg" alt="x">
                         <p>${element.types[0].type.name}</p>
-                        <img src="./assets/types/${element.types[0].type.name}.svg" alt="x">
-                        <p>${element.types[0].type.name}</p>
                     </div>
 
                 </div>
+                
         </div>
 `
     }
@@ -39,7 +39,7 @@ function renderDialog(index) {
     const pokemon = pokemons[index];
     let dialog = "";
     dialog += `
-             <div id="dialog_content">
+             <div id="dialog_content" class="dialog type-${pokemon.types[0].type.name}">
             <div id="dialog_header">
             <button id="close_dialog" onclick="closeDialog()">X</button>
                 <h2>${pokemon.name}</h2>
@@ -61,16 +61,16 @@ function renderDialog(index) {
                 </div>
 
                 <div id="about" class="tab">
-                    <p><strong>Height:</strong> ${pokemon.height}</p>
-                    <p><strong>Weight:</strong> ${pokemon.weight}</p>
-                    <p><strong>Base Experience:</strong> ${pokemon.base_experience}</p>
+                    <p><strong>Height:</strong> ${pokemon.height}cm</p>
+                    <p><strong>Weight:</strong> ${pokemon.weight}kg</p>
+                    <p><strong>Base Experience:</strong> ${pokemon.base_experience}xp</p>
                     <p><strong>Type:</strong> ${pokemon.types.map(type => type.type.name).join(", ")}</p>
                 </div>
 
 
                 <div id="stats" class="tab">
-                    ${pokemon.stats.map(stat =>` 
-                        <p>${stat.stat.name}: ${stat.base_stat}</p>
+                    ${pokemon.stats.map(stat => ` 
+                        <p><strong>${stat.stat.name}:</strong> ${stat.base_stat}</p>
                     `).join("")}
                 </div>
 
@@ -90,11 +90,13 @@ function renderDialog(index) {
 
 function openDialog(index) {
     document.getElementById('dialog').showModal();
+    document.body.classList.add("no-scroll");
     renderDialog(index);
 }
 
 function closeDialog() {
-    document.getElementById('dialog').close()
+    document.getElementById('dialog').close();
+    document.body.classList.remove("no-scroll");
 }
 
 function showTab(tabName) {
@@ -108,6 +110,32 @@ function showTab(tabName) {
 
     document.getElementById(tabName).classList.add("active")
     document.getElementById("btn-" + tabName).classList.add("selected")
+}
+
+function showMore() {
+    visiblePokemons = pokemons.length;
+    document.getElementById("buttonShowMore").classList.add("hidden")
+    document.getElementById("buttonShowLess").classList.remove("hidden")
+    renderPokeCards();
+}
+
+function showLess() {
+    visiblePokemons = 8;
+    document.getElementById("buttonShowMore").classList.remove("hidden")
+    document.getElementById("buttonShowLess").classList.add("hidden")
+    renderPokeCards();
+}
+
+function searchPokemon() {
+    const search = document.getElementById("search").value.toLowerCase().trim();
+    if (search.length < 3) {
+        renderPokeCards();
+        return;
+    }
+    const filteredPokemons = pokemons.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(search)
+    );
+    renderPokeCards(filteredPokemons);
 }
 
 async function preload() {

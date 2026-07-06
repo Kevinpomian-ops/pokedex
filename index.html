@@ -7,6 +7,9 @@
     <title>Pokedex</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="shortcut icon" href="./assets/icons/Pokedex.webp" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet">
 </head>
 
 <body onload="preload()">
@@ -14,25 +17,31 @@
 
     </header>
 
-    <main>
-        <h1>Mein Pokedex</h1>
-        <div id="card">
+    <h1>Mein Pokedex</h1>
+    <input
+    type="text"
+    id="search"
+    placeholder="Pokémon suchen..."
+    oninput="searchPokemon()">
 
-        </div>
-    </main>
+    <main id="card"></main>
+    
+    <button id="buttonShowMore"  class="render-button" onclick="showMore()">Show More</button>
+    <button id="buttonShowLess" class="hidden render-button" onclick="showLess()">Show Less</button>
 
 
 
-    <footer>
 
-    </footer>
+    <footer></footer>
 
-    <dialog id="dialog" class="dialog" closedby="any">
- 
-    </dialog>
+    <div>
+        <dialog id="dialog" closedby="any">
 
+        </dialog>
+    </div>
 </body>
 <script src="./scripts/script.js"></script>
 <!-- <script src="./scripts/tempate.js"></script> -->
 <!-- <script src="./scripts/api.js"></script> -->
+
 </html>
