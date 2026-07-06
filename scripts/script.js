@@ -1,5 +1,6 @@
 let pokemons = []
 let visiblePokemons = 8;
+let activePokemon = 0;
 
 
 async function fetchData() {
@@ -80,6 +81,10 @@ function renderDialog(index) {
                     `).join("")}
                 </div>
 
+                <div id="navBar" class="nav-bar">
+                        <button class="nav-button" onclick="lastPokemon()">⬅️</button>
+                        <button class="nav-button" onclick="nextPokemon()">➡️</button>
+                </div>
 
             </div>
         </div>
@@ -89,9 +94,31 @@ function renderDialog(index) {
 }
 
 function openDialog(index) {
+    activePokemon = index;
+
     document.getElementById('dialog').showModal();
     document.body.classList.add("no-scroll");
-    renderDialog(index);
+
+    renderDialog(activePokemon);
+}
+
+function nextPokemon() {
+    activePokemon++;
+
+    if (activePokemon >= pokemons.length) {
+        activePokemon = 0;
+    };
+    renderDialog(activePokemon);
+}
+
+function lastPokemon() {
+    activePokemon--;
+
+    if (activePokemon < 0) {
+        activePokemon = pokemons.length - 1;
+    }
+
+    renderDialog(activePokemon);
 }
 
 function closeDialog() {
