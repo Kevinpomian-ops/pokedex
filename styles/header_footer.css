@@ -1,0 +1,6 @@
+header, footer {
+    height: 40px;
+    width: 100%;
+    background:linear-gradient(to bottom, #ababab 5%, #867f86 100%);
+	background-color:#ededed;
+}

@@ -3,20 +3,25 @@ main {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    padding: 10px;
+}
+
+.render-button-container {
+    padding: 10px;
 }
 
 .cards {
     display: flex;
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
 }
 
 .cards-content {
     border: 1px solid rgb(255, 7, 7);
     border-radius: 15px;
 
-    height: 300px;
-    width: 300px;
+    height: 18.75rem;
+    width: 18.75rem;
 
     display: flex;
     flex-direction: column;
@@ -94,3 +99,10 @@ label {
 	position:relative;
 	top:1px;
 }
+
+@media screen and (min-width: 0px) and (max-width: 654px) {
+    .cards-content {
+    height: 17.75rem;
+    width: 17.75rem;
+}
+};

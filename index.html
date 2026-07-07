@@ -18,19 +18,16 @@
     </header>
 
     <h1>Mein Pokedex</h1>
-    <input
-    type="text"
-    id="search"
-    placeholder="Pokémon suchen..."
-    oninput="searchPokemon()">
+    <input type="text" id="search" placeholder="Pokémon suchen..." oninput="searchPokemon()">
 
-    <main id="card"></main>
+    <main id="card">
+
+    </main>
     
-    <button id="buttonShowMore"  class="render-button" onclick="showMore()">Show More</button>
-    <button id="buttonShowLess" class="hidden render-button" onclick="showLess()">Show Less</button>
-
-
-
+    <div class="render-button-container">
+        <button id="buttonShowMore" class="render-button" onclick="showMore()">Show More</button>
+        <button id="buttonShowLess" class="hidden render-button" onclick="showLess()">Show Less</button>
+    </div>
 
     <footer></footer>
 
@@ -40,8 +37,8 @@
         </dialog>
     </div>
 </body>
+<script src="./scripts/api.js"></script>
+<script src="./scripts/tempate.js"></script>
 <script src="./scripts/script.js"></script>
-<!-- <script src="./scripts/tempate.js"></script> -->
-<!-- <script src="./scripts/api.js"></script> -->
 
 </html>
