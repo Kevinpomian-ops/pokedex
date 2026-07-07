@@ -1,6 +1,6 @@
 function cardTemplate(element, index) {
     return `
-        <div class="cards" onclick="openDialog(${index})">
+        <div class="cards" onclick="openDialog(${element.id})">
             <input type="checkbox" class="cards_button" hidden>
             <div class="cards-content type-${element.types[0].type.name}">
                 <div id="poke_name">

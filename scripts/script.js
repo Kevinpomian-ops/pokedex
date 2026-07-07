@@ -1,6 +1,8 @@
-
-let visiblePokemons = 8;
+let visiblePokemons = 20;
 let activePokemon = 0;
+
+let offset = 0;
+const limit = 20;
 
 
 
@@ -9,7 +11,7 @@ function renderPokeCards(pokemonList = pokemons) {
     for (let index = 0; index < visiblePokemons && index < pokemonList.length; index++) {
         const element = pokemonList[index];
         console.log(index, element);
-        
+
         document.getElementById("card").innerHTML += cardTemplate(element, index);
     }
 };
@@ -22,10 +24,12 @@ function renderDialog(index) {
     showTab("about")
 }
 
-function openDialog(index) {
-    activePokemon = index;
+function openDialog(id) {
+    const pokemon = pokemons.find(p => p.id === id);
 
-    document.getElementById('dialog').showModal();
+    activePokemon = pokemons.indexOf(pokemon);
+
+    document.getElementById("dialog").showModal();
     document.body.classList.add("no-scroll");
 
     renderDialog(activePokemon);
@@ -68,17 +72,14 @@ function showTab(tabName) {
     document.getElementById("btn-" + tabName).classList.add("selected")
 }
 
-function showMore() {
-    visiblePokemons = pokemons.length;
-    document.getElementById("buttonShowMore").classList.add("hidden")
-    document.getElementById("buttonShowLess").classList.remove("hidden")
+async function showMore() {
+    await loadPokemons();
+    visiblePokemons += 20;
     renderPokeCards();
 }
 
 function showLess() {
-    visiblePokemons = 8;
-    document.getElementById("buttonShowMore").classList.remove("hidden")
-    document.getElementById("buttonShowLess").classList.add("hidden")
+    visiblePokemons = 20;
     renderPokeCards();
 }
 
@@ -94,14 +95,25 @@ function searchPokemon() {
     renderPokeCards(filteredPokemons);
 }
 
-async function preload() {
-    const data = await fetchData();
+async function loadPokemons() {
+    const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+    );
+
+    const data = await response.json();
+
     for (const pokemon of data.results) {
         const response = await fetch(pokemon.url);
         const details = await response.json();
 
         pokemons.push(details);
     }
-    renderPokeCards();
+
+    offset += limit;
 }
+
+async function preload() {
+    await loadPokemons();
+    renderPokeCards();
+};
 
