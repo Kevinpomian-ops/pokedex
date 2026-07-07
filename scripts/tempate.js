@@ -65,8 +65,8 @@ function dialogTemplate(pokemon, index) {
 
                 
                 <div id="navBar" class="nav-bar">
-                        <button class="nav-button" onclick="lastPokemon()">⬅️</button>
-                        <button class="nav-button" onclick="nextPokemon()">➡️</button>
+                        <button class="nav-button" onclick="lastPokemon()">⬅️Last Pokémon</button>
+                        <button class="nav-button" onclick="nextPokemon()">Next Pokémon➡️</button>
                 </div>
             </div>
         </div>

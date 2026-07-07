@@ -3,4 +3,12 @@ header, footer {
     width: 100%;
     background:linear-gradient(to bottom, #ababab 5%, #867f86 100%);
 	background-color:#ededed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 50px;
+}
+
+header img {
+    height: 90px;
 }

@@ -52,6 +52,13 @@ dialog {
 
     font-size: 20px;
     font-weight: 700;
+    cursor: pointer;
+}
+
+#dialog_header button:hover {
+    height: 41px;
+    width: 51px;
+    background-color: rgb(156, 2, 2);
 }
 
 #dialog_body {
@@ -91,16 +98,19 @@ dialog {
 
 #moves {
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 #stats {
     flex-wrap: wrap;
     height: 50%;
+    padding: 20px;
 }
 
 #about {
     flex-wrap: wrap;
     height: 50%;
+    padding: 20px;
 }
 
 .tab.active {
@@ -143,6 +153,6 @@ dialog {
     }
 
     #dialog_header img {
-        height: 60%;
+        height: 40%;
     }
 }

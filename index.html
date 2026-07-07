@@ -14,16 +14,19 @@
 
 <body onload="preload()">
     <header>
-
+        <img src="./assets/icons/pocedex_icon..webp" alt="Pokedex">
     </header>
 
-    <h1>Mein Pokedex</h1>
-    <input type="text" id="search" placeholder="Pokémon suchen..." oninput="searchPokemon()">
+    <h1>Pokedex</h1>
+
+    <div>
+        <input type="text" id="search" placeholder="search Pokémon..." oninput="searchPokemon()">
+    </div>
 
     <main id="card">
 
     </main>
-    
+
     <div class="render-button-container">
         <button id="buttonShowMore" class="render-button" onclick="showMore()">Show More</button>
         <button id="buttonShowLess" class="hidden render-button" onclick="showLess()">Show Less</button>

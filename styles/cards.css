@@ -4,6 +4,7 @@ main {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    flex: 1;
 }
 
 .render-button-container {
@@ -73,36 +74,44 @@ label {
 #poke_name h3 {
     font-size: 50px;
     color: rgb(90, 90, 90);
-    
+
 }
 
 .render-button {
     box-shadow: 3px 4px 0px 0px #899599;
-	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
-	background-color:#ededed;
-	border-radius:15px;
-	border:1px solid #d6bcd6;
-	cursor:pointer;
-	color:#3a8a9e;
-	font-family:Arial;
-	font-size:17px;
-	padding:7px 25px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #e1e2ed;
+    background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+    background-color: #ededed;
+    border-radius: 15px;
+    border: 1px solid #d6bcd6;
+    cursor: pointer;
+    color: #3a8a9e;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 7px 25px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #e1e2ed;
 }
 
 .render-button:hover {
-	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
-	background-color:#bab1ba;
+    background: linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+    background-color: #bab1ba;
 }
+
 .render-button:active {
-	position:relative;
-	top:1px;
+    position: relative;
+    top: 1px;
 }
 
 @media screen and (min-width: 0px) and (max-width: 654px) {
     .cards-content {
-    height: 17.75rem;
-    width: 17.75rem;
+        height: 17.75rem;
+        width: 17.75rem;
+    }
+
+    #poke_element img {
+        height: 40px;
+        width: 40px;
+    }
 }
-};
+
+;
