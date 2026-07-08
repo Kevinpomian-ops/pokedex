@@ -74,9 +74,21 @@ function showTab(tabName) {
 }
 
 async function showMore() {
-    await loadPokemons();
-    visiblePokemons += 20;
-    renderPokeCards();
+    const loader = document.getElementById("loader");
+    const button = document.getElementById("buttonShowMore");
+    loader.classList.remove("hidden");
+    button.disabled = true;
+    await new Promise(resolve => setTimeout(resolve, 0));
+    try {
+        await loadPokemons();
+        visiblePokemons += 20;
+        renderPokeCards();
+    } catch (error) {
+        console.error("Fehler beim Laden:", error);
+    } finally {
+        loader.classList.add("hidden");
+        button.disabled = false;
+    }
 }
 
 function showLess() {
@@ -89,8 +101,11 @@ function searchPokemon() {
         .toLowerCase()
         .trim();
 
+    const button = document.getElementById("buttonShowMore");
+
     if (search.length < 3) {
         renderPokeCards();
+        button.classList.remove("hidden");
         return;
     }
 
@@ -98,6 +113,7 @@ function searchPokemon() {
         pokemon.name.toLowerCase().includes(search)
     );
 
+    button.classList.add("hidden");
     renderPokeCards(filteredPokemons);
 }
 

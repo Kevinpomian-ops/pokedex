@@ -3,8 +3,8 @@ dialog::backdrop {
 }
 
 dialog {
-    height: 80%;
-    width: 80%;
+    height: auto;
+    min-width: 500px;
     padding: 0px;
     position: fixed;
     inset: 0;
@@ -154,5 +154,11 @@ dialog {
 
     #dialog_header img {
         height: 40%;
+    }
+
+    dialog {
+        width: 80%;
+        min-width: 0;
+
     }
 }
