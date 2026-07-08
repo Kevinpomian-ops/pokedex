@@ -3,8 +3,8 @@ dialog::backdrop {
 }
 
 dialog {
-    height: 95%;
-    width: 95%;
+    height: 80%;
+    width: 80%;
     padding: 0px;
     position: fixed;
     inset: 0;
@@ -33,7 +33,7 @@ dialog {
 }
 
 #dialog_header {
-    height: 50%;
+    height: 45%;
 }
 
 #dialog_header img {
@@ -62,7 +62,7 @@ dialog {
 }
 
 #dialog_body {
-    height: 50%;
+    height: 55%;
     background: linear-gradient(160deg,
             #000000 0%,
             #1463ca 35%,
@@ -82,7 +82,7 @@ dialog {
 .tab {
     display: none;
     border-top: 20px solid black;
-    height: 80%;
+    height: 70%;
     flex-direction: column;
     align-items: flex-start;
 }
@@ -98,18 +98,18 @@ dialog {
 
 #moves {
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 10px;
 }
 
 #stats {
     flex-wrap: wrap;
-    height: 50%;
-    padding: 20px;
+    height: 65%;
+    padding: 10px;
 }
 
 #about {
     flex-wrap: wrap;
-    height: 50%;
+    height: 65%;
     padding: 20px;
 }
 
@@ -149,7 +149,7 @@ dialog {
 
 @media screen and (min-width: 0px) and (max-width: 767px) {
     #dialog_body p {
-        font-size: 25px;
+        font-size: 20px;
     }
 
     #dialog_header img {

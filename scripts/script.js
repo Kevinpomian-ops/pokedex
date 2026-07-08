@@ -1,35 +1,37 @@
 let visiblePokemons = 20;
 let activePokemon = 0;
-
 let offset = 0;
 const limit = 20;
+const dialog = document.getElementById("dialog");
+
+dialog.addEventListener("close", () => {
+    document.body.classList.remove("no-scroll");
+});
 
 
 
 function renderPokeCards(pokemonList = pokemons) {
-    document.getElementById('card').innerHTML = "";
-    for (let index = 0; index < visiblePokemons && index < pokemonList.length; index++) {
-        const element = pokemonList[index];
-        console.log(index, element);
+    currentPokemonList = pokemonList;
 
-        document.getElementById("card").innerHTML += cardTemplate(element, index);
+    document.getElementById("card").innerHTML = "";
+
+    for (let index = 0; index < pokemonList.length; index++) {
+        document.getElementById("card").innerHTML += cardTemplate(pokemonList[index], index);
     }
-};
+}
 
 function renderDialog(index) {
-    const pokemon = pokemons[index];
+    const pokemon = currentPokemonList[index];
     let dialog = "";
     dialog += dialogTemplate(pokemon);
     document.getElementById('dialog').innerHTML = dialog;
-    showTab("about")
+    showTab("about");
 }
 
 function openDialog(id) {
-    const pokemon = pokemons.find(p => p.id === id);
+    activePokemon = currentPokemonList.findIndex(p => p.id === id);
 
-    activePokemon = pokemons.indexOf(pokemon);
-
-    document.getElementById("dialog").showModal();
+    dialog.showModal();
     document.body.classList.add("no-scroll");
 
     renderDialog(activePokemon);
@@ -38,7 +40,7 @@ function openDialog(id) {
 function nextPokemon() {
     activePokemon++;
 
-    if (activePokemon >= pokemons.length) {
+    if (activePokemon >= currentPokemonList.length) {
         activePokemon = 0;
     };
     renderDialog(activePokemon);
@@ -48,15 +50,14 @@ function lastPokemon() {
     activePokemon--;
 
     if (activePokemon < 0) {
-        activePokemon = pokemons.length - 1;
+        activePokemon = currentPokemonList.length - 1;
     }
 
     renderDialog(activePokemon);
 }
 
 function closeDialog() {
-    document.getElementById('dialog').close();
-    document.body.classList.remove("no-scroll");
+    dialog.close();
 }
 
 function showTab(tabName) {
@@ -84,14 +85,19 @@ function showLess() {
 }
 
 function searchPokemon() {
-    const search = document.getElementById("search").value.toLowerCase().trim();
+    const search = document.getElementById("search").value
+        .toLowerCase()
+        .trim();
+
     if (search.length < 3) {
         renderPokeCards();
         return;
     }
+
     const filteredPokemons = pokemons.filter(pokemon =>
         pokemon.name.toLowerCase().includes(search)
     );
+
     renderPokeCards(filteredPokemons);
 }
 
@@ -115,5 +121,10 @@ async function loadPokemons() {
 async function preload() {
     await loadPokemons();
     renderPokeCards();
+
+    document.getElementById('dialog').close();
+    dialog.addEventListener("close", () => {
+    document.body.classList.remove("no-scroll");
+    })
 };
 
